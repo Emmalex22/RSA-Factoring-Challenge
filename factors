@@ -1,0 +1,36 @@
+import sys
+
+def factorize(num):
+    """
+    Factorize a number into a product of two smaller numbers.
+
+    Parameters:
+    num (int): The number to factorize.
+
+    Returns:
+    str: The factorization in the format "n=p*q".
+    """
+    factors = []
+    for i in range(2, num):
+        if num % i == 0:
+            factors.append((i, num // i))
+            break
+    return f"{num}={factors[0][0]}*{factors[0][1]}"
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: factors <file>")
+        sys.exit(1)
+
+    filename = sys.argv[1]
+    try:
+        with open(filename, 'r') as file:
+            numbers = file.read().splitlines()
+            for number in numbers:
+                print(factorize(int(number)))
+    except FileNotFoundError:
+        print(f"File '{filename}' not found.")
+        sys.exit(1)
+    except ValueError:
+        print("Invalid number in the file.")
+        sys.exit(1)

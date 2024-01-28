@@ -1,0 +1,39 @@
+import sys
+import time
+
+
+def factorize(num):
+    """
+    Factorize a number into its prime factors.
+
+    Parameters:
+    num (int): The number to factorize.
+
+    Returns:
+    list: A list containing the prime factors of the number.
+    """
+    factors = []
+    divisor = 2
+
+    while num > 1:
+        while num % divisor == 0:
+            factors.append(divisor)
+            num //= divisor
+        divisor += 1
+
+    return factors
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python factorize_rsa.py <number>")
+        sys.exit(1)
+
+    n = int(sys.argv[1])
+
+    start_time = time.time()
+    prime_factors = factorize(n)
+    end_time = time.time()
+
+    print("Prime factors of", n, ":", prime_factors)
+    print("Time taken:", end_time - start_time, "seconds")
